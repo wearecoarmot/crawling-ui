@@ -16,5 +16,5 @@ Including another URLconf
 from django.urls import include, path
 
 urlpatterns = [
-    path('', include('server.crawling.urls')),
+    path('api', include('server.crawling.urls')),
 ]
