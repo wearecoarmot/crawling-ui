@@ -6,16 +6,14 @@
 | Back-End | [kuckjwi](https://github.com/kuckjwi0928) |
 | Front-End | [devkang](https://github.com/LeeKangHyun) |
 | Front-End | [FlyingSquirrel](https://github.com/flyingSquirrel-dev) |
+| Front-End | [ForPK](https://github.com/ForPK) |
 
 ## 사전 준비 사항
 python3.8
 
-## django 설치
+## 라이브러리 설치
 ~~~ shell script
-# django 설치
-pip install django
-# 설치 확인
-pip freeze
+pip install -r requirements.txt
 ~~~
 
 ## 서버 실행
