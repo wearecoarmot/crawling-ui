@@ -3,15 +3,17 @@ import Axios from 'axios';
 import produce from 'immer';
 
 interface iAppReducer {
-  data: string
+  data: string;
 }
 
 const CHANGE_DATA = 'CHANGE_DATA';
+const RESET_DATA = 'RESET_DATA';
 
 const reducer = produce((draft, action) => {
   switch (action.type) {
+    case RESET_DATA:
     case CHANGE_DATA:
-      draft.data = action.payload
+      draft.data = action.payload;
   }
 });
 
@@ -25,13 +27,14 @@ const App: React.FC = () => {
   useEffect(() => {
     async function call() {
       try {
-        const { data } = await Axios.get('/api');
+        const data = await Axios.get('/api');
+
         dispatch({
           type: CHANGE_DATA,
-          payload: data,
+          payload: (data as any).crawlingsettings,
         });
 
-      } catch(err) {
+      } catch (err) {
         console.error(err);
       }
     }
