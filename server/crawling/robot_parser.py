@@ -11,15 +11,15 @@ class RobotParser:
             try:
                 key, value = map(str, content.split(self.colon))
                 # remove space
-                v = value.strip()
-                if key == 'User-Agent' and v == '*':
+                new_value = value.strip()
+                if key == 'User-Agent' and new_value == '*':
                     all_agent = True
                     continue
 
                 if all_agent and 'Allow' == key:
-                    self.allow_urls.append(v)
+                    self.allow_urls.append(new_value)
                 elif all_agent and 'Disallow' == key:
-                    self.disallow_urls.append(v)
+                    self.disallow_urls.append(new_value)
                 else:
                     all_agent = False
             except ValueError:
