@@ -36,4 +36,4 @@ jobs:
     - name: Test with jest
       run: |
         cd ./client
-        npm run test
+        CI=true npm run test
