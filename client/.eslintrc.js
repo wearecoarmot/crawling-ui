@@ -7,6 +7,14 @@ module.exports = {
     "browser": true,
     "jest": true
   },
+  "ignorePatterns": [
+    "scripts/*",
+    "config/*",
+    "serviceWorker.*",
+    "setupProxy.*",
+    "**/*.d.ts",
+    "**/*.test.*"
+  ],
   "rules": {
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
