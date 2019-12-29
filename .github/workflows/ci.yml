@@ -35,4 +35,5 @@ jobs:
         npm install
     - name: Test with jest
       run: |
+        cd ./client
         npm run test
