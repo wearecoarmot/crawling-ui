@@ -152,5 +152,17 @@ const func3 = function() {
 ## typescript rules
 [참조사이트](https://medium.com/@martin_hotell/10-typescript-pro-tips-patterns-with-or-without-react-5799488d6680)
 
+6. Folder 구조
+
+```js
+// components 콤포넌트 분리
+// => components 여러개로 하나의 container 를 이룬다.
+
+// containers 콤포넌트 상위 콤포넌트
+// => containers 여러개로 하나의 page component 를 이룬다.
+
+// pages router 내에서 보여지는 콤포넌트
+```
+
 
 
