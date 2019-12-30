@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { LoadingWrap } from './styled';
 
-const Loading: React.FC = ({  }) => {
+const Loading: React.FC = () => {
   useEffect(() => {
 
   }, []);

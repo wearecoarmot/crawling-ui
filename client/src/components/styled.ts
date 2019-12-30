@@ -14,9 +14,15 @@ export const GlobalStyled = createGlobalStyle`
     background: ${({ theme, }) => theme.body};
     color: ${({ theme, }) => theme.text};
   }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 export const PageTemplate = styled.article`
   display: flex;
+  flex-direction: column;
 `;
 
