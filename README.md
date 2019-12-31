@@ -10,6 +10,7 @@
 
 ## Prerequisites
 `python3.8`
+`npm >=12.14.0(latest)`
 `pip`
 `yarn`
 
@@ -30,7 +31,7 @@ To start this app, run as below:
     ~~~ shell script
     python manage.py runserver
     ~~~
-2. To run an client app, execute a command in `client` directory
+2. To run a client app, execute a command in `client` directory
     ~~~ shell script
    cd client/
     yarn start
