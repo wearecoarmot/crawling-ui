@@ -8,15 +8,30 @@
 | Front-End | [FlyingSquirrel](https://github.com/flyingSquirrel-dev) |
 | Front-End | [ForPK](https://github.com/ForPK) |
 
-## 사전 준비 사항
-python3.8
+## Prerequisites
+`python3.8`
+`pip`
+`yarn`
 
-## 라이브러리 설치
-~~~ shell script
-pip install -r requirements.txt
-~~~
+## Installing packages/modules
+1. Install packages using pip
+    ~~~ shell script
+    pip install -r requirements.txt
+    ~~~
+2. Install modules using yarn in `client` directory
+    ~~~ shell script
+   cd client/
+    yarn install
+    ~~~
 
-## 서버 실행
-~~~ shell script
-python manage.py runserver
-~~~
+## Getting Started
+To start this app, run as below:
+1. To run a server, execute a command in the root directory
+    ~~~ shell script
+    python manage.py runserver
+    ~~~
+2. To run an client app, execute a command in `client` directory
+    ~~~ shell script
+   cd client/
+    yarn start
+    ~~~
