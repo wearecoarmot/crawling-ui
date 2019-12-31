@@ -2,6 +2,9 @@
   "name": "crawling-ui",
   "version": "0.0.1",
   "private": true,
+  "engines" : {
+    "node": ">=12.14.0"
+  },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
