@@ -24,5 +24,6 @@ export const GlobalStyled = createGlobalStyle`
 export const PageTemplate = styled.article`
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 `;
 
