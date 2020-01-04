@@ -19,10 +19,15 @@ export const GlobalStyled = createGlobalStyle`
     text-decoration: none;
     color: inherit;
   }
+  
+  :root {
+    --background-color: #C4E26C;
+  }
 `;
 
 export const PageTemplate = styled.article`
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 `;
 

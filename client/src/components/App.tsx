@@ -10,6 +10,7 @@ import { darkTheme, lightTheme } from '~/theme';
 
 import i18n from '~/lang/i18n';
 import Header from './Header';
+import Footer from './Footer';
 import Loading from './Loading';
 
 import { GlobalStyled, PageTemplate } from './styled';
@@ -28,7 +29,6 @@ const App = () => {
   return (
     <I18nextProvider i18n={i18n}>
       <ThemeProvider theme={themeMode}>
-        <Header theme={theme as Theme} toggleTheme={toggleTheme as ToggleTheme} />
         <PageTemplate>
           <Suspense fallback={<Loading />}>
             <Helmet>
@@ -36,9 +36,11 @@ const App = () => {
               <meta name="description" content="The purpose of this project is automate crawling." />
             </Helmet>
 
+            <Header theme={theme as Theme} toggleTheme={toggleTheme as ToggleTheme} />
             <Switch>
               <Route path="/" component={Home} />
             </Switch>
+            <Footer />
           </Suspense>
           <GlobalStyled />
         </PageTemplate>
