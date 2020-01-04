@@ -3,7 +3,7 @@ import { produce, Draft } from 'immer';
 
 export type userState = {
   email: string;
-}
+};
 
 export const user = createModel({
   state: {

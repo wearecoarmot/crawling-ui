@@ -5,7 +5,7 @@ import Root from './Root';
 describe('<Root />', () => {
   it('renders ', () => {
     const { getByText } = render(<Root />);
-    const text = getByText(/crawling/i);
+    const text = getByText(/weare/i);
     expect(text).toBeInTheDocument();
   });
 });

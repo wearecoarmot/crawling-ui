@@ -2,16 +2,22 @@ import styled from '~/lib/styled';
 
 export const Header = styled.header`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
-  height: 68px;
-  padding: 0 1em;
-  background-color: #A2A1F9;
+  height: 192px;
+  padding: 10px;
+  background-color: var(--background-color);
   
   h1 {
     color: #FFFFFF;
-    font-size: 2em;
-    line-height: 1.5em;
+    font-size: 19px;
+    font-weight: 700;
+    a {
+      display: inline-flex;
+      svg {
+        margin-right: 5px;
+      }
+    }
   }
 `;
 

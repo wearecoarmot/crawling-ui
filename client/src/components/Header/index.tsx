@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Theme, ToggleTheme } from '~/hooks/useDarkMode';
+import Logo from '~/components/Logo';
+
 import { Header, ThemeBtn, Translate } from './styled';
 
 export type HeaderProps = {
@@ -9,11 +11,13 @@ export type HeaderProps = {
   toggleTheme: ToggleTheme;
 }
 
-const HeaderComponent = ({ theme, toggleTheme, }: HeaderProps) => {
+const HeaderComponent = ({ theme, toggleTheme }: HeaderProps) => {
   return (
     <Header>
       <h1>
-        <Link to='/'>Crawling UI</Link>
+        <Link to='/'>
+          <Logo />wearecoarmot
+        </Link>
       </h1>
 
       <ThemeBtn onClick={toggleTheme}>
