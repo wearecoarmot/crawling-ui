@@ -1,7 +1,8 @@
 module.exports = {
   "extends": [
     "react-app",
-    "prettier"
+    "prettier",
+    "plugin:jsx-a11y/recommended"
   ],
   "env": {
     "browser": true,

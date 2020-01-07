@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './lang/i18n';
+import axe from 'react-axe';
 
 import Root from './Root';
+
+import './lang/i18n';
+
+if (process.env.NODE_ENV !== 'production') {
+  axe(React, ReactDOM, 1000);
+}
 
 ReactDOM.render(<Root />, document.getElementById('root'));

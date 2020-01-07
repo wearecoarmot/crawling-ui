@@ -15,7 +15,7 @@ import Loading from './Loading';
 
 import { GlobalStyled, PageTemplate } from './styled';
 
-const Home = lazy(() => import(/* webpackChunkName: 'Home' */'~/pages/Home'));
+const Home = lazy(() => import(/* webpackChunkName: 'Home' */ '~/pages/Home'));
 
 const App = () => {
   const [theme, toggleTheme, componentMounted] = useDarkMode();

@@ -6,6 +6,10 @@ import { initReactI18next } from 'react-i18next';
 import translationEn from './translation.en.json';
 import translationKo from './translation.ko.json';
 
+export type tLang =
+  | 'ko'
+  | 'en'
+
 const resources = {
   en: {
     translation: translationEn,

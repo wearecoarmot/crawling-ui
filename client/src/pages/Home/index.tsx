@@ -9,9 +9,6 @@ const HomeComponent: React.FC = () => {
       <h1>Crawling-ui</h1>
       <div>{t('message.hello')}</div>
       <div>{t('n.selected', { n: 1 })}</div>
-
-      <button onClick={() => i18n.changeLanguage('ko')}>KO</button>
-      <button onClick={() => i18n.changeLanguage('en')}>EN</button>
     </div>
   );
 };
