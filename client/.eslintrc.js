@@ -1,8 +1,13 @@
 module.exports = {
   "extends": [
     "react-app",
+    "plugin:jsx-a11y/recommended",
     "prettier",
-    "plugin:jsx-a11y/recommended"
+    "prettier/react",
+    "prettier/@typescript-eslint",
+  ],
+  "plugins": [
+    "prettier"
   ],
   "env": {
     "browser": true,
@@ -17,6 +22,7 @@ module.exports = {
     "**/*.test.*"
   ],
   "rules": {
+    "prettier/prettier": ["warn"],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "comma-dangle": ["error", "always-multiline"],
