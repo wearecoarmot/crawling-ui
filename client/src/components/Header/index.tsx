@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { Theme, ToggleTheme } from '~/hooks/useDarkMode';
 import Logo from '~/components/Logo';
-import Translate from '~/components/Translate';
 
 import { Header, ThemeBtn } from './styled';
 
@@ -84,8 +83,6 @@ const HeaderComponent = ({ theme, toggleTheme }: HeaderProps) => {
           </svg>
         )}
       </ThemeBtn>
-
-      <Translate />
     </Header>
   );
 };

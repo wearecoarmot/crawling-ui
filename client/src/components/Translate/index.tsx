@@ -7,25 +7,21 @@ import Earth from './icon/Earth';
 
 import { Translate, TransBtn, LangWrap, Lang } from './styled';
 
-type Translate = {
-  onClick(): () => void;
-}
-
 const TranslateComponent = () => {
   const { i18n } = useTranslation();
   const [isMove, setMove] = useState(false);
 
   function onClick() {
-    setMove(prevState => !prevState);
+    setMove((prevState) => !prevState);
   }
 
   function changeLanguage(lang: tLang) {
-    i18n.changeLanguage(lang);
+    i18n.changeLanguage(lang).finally(() => setMove(false));
   }
 
   return (
     <Translate>
-      <TransBtn onClick={onClick} onFocus={onClick}>
+      <TransBtn onClick={onClick}>
         <Earth />
         Choose Language
       </TransBtn>
@@ -33,10 +29,10 @@ const TranslateComponent = () => {
       {isMove && (
         <LangWrap>
           <li>
-            <Lang onClick={() => changeLanguage('ko')}>KOR</Lang>
+            <Lang onClick={() => changeLanguage('ko')}>•KOR</Lang>
           </li>
           <li>
-            <Lang onClick={() => changeLanguage('en')}>ENG</Lang>
+            <Lang onClick={() => changeLanguage('en')}>•ENG</Lang>
           </li>
         </LangWrap>
       )}
