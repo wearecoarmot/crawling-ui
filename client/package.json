@@ -2,7 +2,7 @@
   "name": "crawling-ui",
   "version": "0.0.1",
   "private": true,
-  "engines" : {
+  "engines": {
     "node": ">=12.14.0"
   },
   "scripts": {
@@ -79,6 +79,7 @@
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
+    "@types/react-axe": "^3.1.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-helmet": "^5.0.14",
     "@types/react-redux": "^7.1.5",
@@ -87,18 +88,19 @@
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
     "babel-plugin-root-import": "^6.4.1",
-    "babel-plugin-styled-components": "^1.10.6",
     "eslint": "^6.6.0",
-    "eslint-config-prettier": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
     "eslint-config-react-app": "^5.1.0",
     "eslint-loader": "3.0.2",
     "eslint-plugin-flowtype": "3.13.0",
     "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "7.16.0",
     "eslint-plugin-react-hooks": "^1.6.1",
     "prettier": "^1.19.1",
-    "prettier-eslint": "^9.0.1"
+    "prettier-eslint": "^9.0.1",
+    "react-axe": "^3.3.0"
   },
   "browserslist": {
     "production": [

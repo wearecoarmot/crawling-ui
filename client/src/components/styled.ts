@@ -11,8 +11,8 @@ export const GlobalStyled = createGlobalStyle`
   }
   
   body {
-    background: ${({ theme, }) => theme.body};
-    color: ${({ theme, }) => theme.text};
+    background: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.text};
   }
   
   a {
@@ -21,7 +21,7 @@ export const GlobalStyled = createGlobalStyle`
   }
   
   :root {
-    --background-color: #C4E26C;
+    --background-color: #9AC3F3;
   }
 `;
 
