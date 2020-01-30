@@ -9,7 +9,7 @@ from rest_framework_jwt.settings import api_settings
 from selenium import webdriver
 
 from server.config import CHROME_DRIVER_PATH
-from server.crawling.exceptions.HttpException import BadRequestException, HttpException, UnAuthorizedException
+from server.crawling.exceptions.httpexception import BadRequestException, HttpException, UnAuthorizedException
 from server.crawling.models import User
 from server.crawling.robot_parser import RobotParser
 from server.crawling.utils.hasherspassword import HashersPassword

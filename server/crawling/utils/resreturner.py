@@ -1,7 +1,7 @@
 from django.http import HttpResponseBadRequest
 from rest_framework import status
 
-from server.crawling.extensions.HttpResponseExtension import HttpResponseUnauthorized
+from server.crawling.extensions.httpresponseextension import HttpResponseUnauthorized
 
 RETURNER_DIC = {
     status.HTTP_400_BAD_REQUEST: lambda msg: HttpResponseBadRequest(msg),
