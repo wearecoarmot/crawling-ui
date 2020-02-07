@@ -29,6 +29,11 @@
 To start this app, run as below:
 1. To run a server, execute a command in the root directory
     ~~~ shell script
+    # first run
+    python manage.py makemigrations
+    python manage.py migrate
+    python manger.py createadmin
+    # run server
     python manage.py runserver
     ~~~
 2. To run a client app, execute a command in `client` directory

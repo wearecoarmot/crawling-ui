@@ -4,8 +4,10 @@ certifi==2019.11.28
 chardet==3.0.4
 Django==3.0.1
 djangorestframework==3.11.0
+djangorestframework-jwt==1.11.0
 idna==2.8
 lxml==4.4.2
+PyJWT==1.7.1
 pytz==2019.3
 requests==2.22.0
 selenium==3.141.0
