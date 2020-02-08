@@ -13,15 +13,13 @@ export const GlobalStyled = createGlobalStyle`
   body {
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
   
   a {
     text-decoration: none;
     color: inherit;
-  }
-  
-  :root {
-    --background-color: #9AC3F3;
   }
 `;
 
@@ -30,4 +28,3 @@ export const PageTemplate = styled.article`
   flex-direction: column;
   min-height: 100vh;
 `;
-

@@ -7,9 +7,11 @@ import { ThemeProvider } from '~/lib/styled';
 import { darkTheme, lightTheme } from '~/theme';
 import i18n from '~/lang/i18n';
 
+import routes from '../router-config';
+
 import Header from './Header';
-import Footer from './Footer';
 import Loading from './Loading';
+import SideMenu from './SideMenu';
 
 import { GlobalStyled, PageTemplate } from './styled';
 
@@ -30,10 +32,14 @@ const App = () => {
         <PageTemplate>
           <Suspense fallback={<Loading />}>
             <Header theme={theme as Theme} toggleTheme={toggleTheme as ToggleTheme} />
+            <SideMenu />
             <Switch>
-              <Route path="/" component={Home} />
+              <Route path="/" component={Home} exact={true} />
+
+              {routes.map((route) => (
+                <Route key={route.path} path={route.path} component={route.component} exact={route.exact} />
+              ))}
             </Switch>
-            <Footer />
           </Suspense>
           <GlobalStyled />
         </PageTemplate>
