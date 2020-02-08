@@ -6,20 +6,6 @@ export const Header = styled.header`
   width: 100%;
   height: 60px;
   padding: 10px;
-  background-color: var(--background-color);
-
-  h1 {
-    color: #ffffff;
-    font-size: 0;
-    font-weight: 700;
-    a {
-      display: inline-flex;
-      font-size: 19px;
-      svg {
-        margin-right: 5px;
-      }
-    }
-  }
 `;
 
 export const ThemeBtn = styled.button`

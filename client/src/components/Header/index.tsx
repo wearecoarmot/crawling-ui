@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { Theme, ToggleTheme } from '~/hooks/useDarkMode';
-import Logo from '~/components/Logo';
 
 import { Header, ThemeBtn } from './styled';
 
@@ -14,13 +12,6 @@ export type HeaderProps = {
 const HeaderComponent = ({ theme, toggleTheme }: HeaderProps) => {
   return (
     <Header>
-      <h1>
-        <Link to="/">
-          <Logo />
-          wearecoarmot
-        </Link>
-      </h1>
-
       <ThemeBtn onClick={toggleTheme}>
         {theme === 'light' ? (
           <svg width="25" height="24" viewBox="0 0 25 24" fill="none">
