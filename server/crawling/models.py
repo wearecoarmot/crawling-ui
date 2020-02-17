@@ -16,7 +16,7 @@ class User(AbstractBaseUser):
     password = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     roles = models.CharField(max_length=1, db_index=True)
-    active = models.CharField(max_length=1, db_index=True)
+    active = models.CharField(max_length=1, db_index=True, default='Y')
     create_date = models.DateTimeField(auto_now_add=True, db_index=True)
 
     objects = UserManager()
