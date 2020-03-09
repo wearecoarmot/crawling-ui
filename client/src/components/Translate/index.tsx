@@ -26,16 +26,22 @@ const TranslateComponent = () => {
         Choose Language
       </TransBtn>
 
-      {isMove && (
-        <LangWrap>
+      <LangWrap>
+        {isMove ? (
+          <>
+            <li>
+              <Lang onClick={() => changeLanguage('ko')}>•KOR</Lang>
+            </li>
+            <li>
+              <Lang onClick={() => changeLanguage('en')}>•ENG</Lang>
+            </li>
+          </>
+        ) : (
           <li>
-            <Lang onClick={() => changeLanguage('ko')}>•KOR</Lang>
+            <Lang>{i18n.language === 'ko' ? 'KOR' : 'ENG'}</Lang>
           </li>
-          <li>
-            <Lang onClick={() => changeLanguage('en')}>•ENG</Lang>
-          </li>
-        </LangWrap>
-      )}
+        )}
+      </LangWrap>
     </Translate>
   );
 };

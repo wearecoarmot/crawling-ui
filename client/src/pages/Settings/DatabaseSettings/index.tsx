@@ -1,6 +1,6 @@
 import React from 'react';
-import { PageContent } from '~/pages/styled';
+import { PageWrap } from '~/pages/styled';
 
-const DatabaseSettings: React.FC = () => <PageContent>DatabaseSettings</PageContent>;
+const DatabaseSettings: React.FC = () => <PageWrap>DatabaseSettings</PageWrap>;
 
 export default DatabaseSettings;

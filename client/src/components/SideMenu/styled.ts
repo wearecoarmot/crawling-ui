@@ -1,13 +1,18 @@
 import styled from '~/lib/styled';
 
 export const SideContainer = styled.div`
-  position: fixed;
+  display: flex;
   flex-direction: column;
+  width: 200px;
+  min-width: 215px;
 `;
 
 export const StyledLogo = styled.h1`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
   color: #ffffff;
-  margin: 20px;
   font-size: 0;
   font-weight: 700;
   text-shadow: 1px 1px 1px #b6b6b6;
@@ -20,25 +25,33 @@ export const StyledLogo = styled.h1`
   }
 `;
 
-export const SideMenu = styled.div`
-  position: fixed;
+export const SideMenu = styled.ul`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  top: 50%;
-  left: 0;
-  transform: translate(0, -50%);
-  width: 200px;
-  min-width: 215px;
-  height: 90%;
-  color: #a4cbf0;
-  font-size: 20px;
+  height: 100%;
+  padding-left: 30px;
   border-right: 2px dashed #ffffff;
+`;
+
+export const SideItem = styled.li`
+  color: ${({ theme }) => theme.linkColor};
+  font-size: 20px;
   line-height: 2;
   a {
+    position: relative;
     &:hover {
       color: #fff;
+    }
+    &.active {
+      color: #5da2e3;
+      &::before {
+        position: absolute;
+        top: 50%;
+        left: -6px;
+        transform: translate(-50%, -50%);
+        content: '•';
+      }
     }
   }
 `;

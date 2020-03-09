@@ -13,8 +13,7 @@ export const GlobalStyled = createGlobalStyle`
   body {
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    font-family: 'Noto Sans', sans-serif;
   }
   
   a {
@@ -25,6 +24,11 @@ export const GlobalStyled = createGlobalStyle`
 
 export const PageTemplate = styled.article`
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  flex-direction: row;
+  height: 100vh;
+`;
+
+export const PageContent = styled.div`
+  width: 100%;
+  overflow: auto;
 `;

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import Logo from '../Logo';
-
-import { SideContainer, StyledLogo, SideMenu } from './styled';
 import FooterComponent from '../Footer';
+
+import { SideContainer, StyledLogo, SideMenu, SideItem } from './styled';
 
 const HomeLogo = () => (
   <StyledLogo>
@@ -19,9 +19,15 @@ const SideArea = () => (
   <SideContainer>
     <HomeLogo />
     <SideMenu>
-      <Link to="/dashboard">Dashboard</Link>
-      <Link to="/crawling/settings">Crawling Setting</Link>
-      <Link to="/database/settings">Database Setting</Link>
+      <SideItem>
+        <NavLink to="/dashboard">Dashboard</NavLink>
+      </SideItem>
+      <SideItem>
+        <NavLink to="/crawling/settings">Crawling Setting</NavLink>
+      </SideItem>
+      <SideItem>
+        <NavLink to="/database/settings">Database Setting</NavLink>
+      </SideItem>
     </SideMenu>
     <FooterComponent />
   </SideContainer>

@@ -11,6 +11,7 @@ export const TransBtn = styled.button`
   background-color: transparent;
   font-size: 0;
   cursor: pointer;
+  outline: none;
 `;
 
 export const LangWrap = styled.ul`
@@ -18,15 +19,16 @@ export const LangWrap = styled.ul`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5px;
+  margin-top: 3px;
 `;
 
 export const Lang = styled.button`
   padding: 0;
   border: none;
   background-color: transparent;
-  color: #9ac3f3;
+  color: #a4cbf0;
   font-size: 12px;
   font-weight: 500;
   line-height: 14px;
+  outline: none;
 `;

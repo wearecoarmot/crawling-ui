@@ -1,6 +1,12 @@
-import DashBoard from './pages/DashBoard';
-import CrawlingSettings from './pages/Settings/CrawlingSettings';
-import DatabaseSettings from './pages/Settings/DatabaseSettings';
+import { lazy } from 'react';
+
+const DashBoard = lazy(() => import(/* webpackChunkName: "DashBoard" */ './pages/DashBoard'));
+const CrawlingSettings = lazy(() =>
+  import(/* webpackChunkName: "CrawlingSettings" */ './pages/Settings/CrawlingSettings'),
+);
+const DatabaseSettings = lazy(() =>
+  import(/* webpackChunkName: "DatabaseSettings" */ './pages/Settings/DatabaseSettings'),
+);
 
 type RoutesArguments = {
   path: string;
@@ -8,7 +14,7 @@ type RoutesArguments = {
   exact?: boolean;
 };
 
-const routes: Array<RoutesArguments> = [
+const routes: RoutesArguments[] = [
   /* dashboard */
   {
     path: '/dashboard',
