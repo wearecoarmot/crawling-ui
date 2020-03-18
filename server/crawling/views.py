@@ -2,53 +2,59 @@ from bs4 import BeautifulSoup
 from django.http import HttpRequest, JsonResponse, HttpResponseBadRequest
 from requests import get
 from rest_framework import status
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework_jwt.settings import api_settings
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from selenium import webdriver
 
 from server.config import CHROME_DRIVER_PATH
-from server.crawling.exceptions.httpexception import BadRequestException, HttpException, UnAuthorizedException
+from server.crawling.exceptions.httpexception import (
+    HttpException, UnAuthorizedException
+)
 from server.crawling.models import User
 from server.crawling.robot_parser import RobotParser
 from server.crawling.utils.hasherspassword import HashersPassword
 from server.crawling.utils.resreturner import ResReturner
-
-jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
-jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+from server.crawling.utils.token import TokenUtils
+from server.crawling.utils.validator import Validator
 
 
 @api_view(['POST'])
 def user_login(req: HttpRequest):
-    def issue_token(_user):
-        payload = jwt_payload_handler(_user)
-        return jwt_encode_handler(payload)
-
-    user_id = req.POST.get('user_id')
-    password = req.POST.get('password')
-
+    login_fail_msg = 'Sign In information does not match.'
     try:
-        if not user_id:
-            raise BadRequestException('Missing user_id parameter.')
-        elif not password:
-            raise BadRequestException('Missing password parameter.')
+        Validator.param_validator(req.POST, ['user_id', 'password'])
+
+        user_id = req.POST.get('user_id')
+        password = req.POST.get('password')
 
         user = User.objects.get(id=user_id)
 
         if not HashersPassword.is_matched_password(password, user.password):
-            raise UnAuthorizedException('Sign In information does not match.')
+            raise UnAuthorizedException(login_fail_msg)
+
+        if user.active == 'N':
+            raise UnAuthorizedException('This user is inactive.')
 
         return JsonResponse({
-            'token': issue_token(user),
+            'token': TokenUtils.issue_token(user),
             'name': user.name,
         })
     except HttpException as he:
         return ResReturner.get_res(he.code, he.message)
+    except User.DoesNotExist:
+        return ResReturner.get_res(status.HTTP_401_UNAUTHORIZED, login_fail_msg)
+
+
+
+# TODO(kuckjwi): need to blacklist check.
+@api_view(['GET'])
+def logout():
+    pass
 
 
 @api_view(['GET'])
-@authentication_classes([SessionAuthentication, BasicAuthentication])
+@authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def is_possible_crawling(req: HttpRequest):
     # TODO(kuckjwi): subdomain scan.
