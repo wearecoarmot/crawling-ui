@@ -9,11 +9,11 @@ import i18n from '~/lang/i18n';
 
 import routes from '../router-config';
 
-import Header from './Header';
+import SideOption from './SideOption';
 import Loading from './Loading';
 import SideMenu from './SideMenu';
 
-import { GlobalStyled, PageTemplate } from './styled';
+import { GlobalStyled, PageTemplate, PageContent } from './styled';
 
 const Home = lazy(() => import(/* webpackChunkName: 'Home' */ '~/pages/Home'));
 
@@ -31,15 +31,17 @@ const App = () => {
       <ThemeProvider theme={themeMode}>
         <PageTemplate>
           <Suspense fallback={<Loading />}>
-            <Header theme={theme as Theme} toggleTheme={toggleTheme as ToggleTheme} />
             <SideMenu />
-            <Switch>
-              <Route path="/" component={Home} exact={true} />
+            <PageContent>
+              <Switch>
+                <Route path="/" component={Home} exact={true} />
 
-              {routes.map((route) => (
-                <Route key={route.path} path={route.path} component={route.component} exact={route.exact} />
-              ))}
-            </Switch>
+                {routes.map((route) => (
+                  <Route key={route.path} path={route.path} component={route.component} exact={route.exact} />
+                ))}
+              </Switch>
+            </PageContent>
+            <SideOption theme={theme as Theme} toggleTheme={toggleTheme as ToggleTheme} />
           </Suspense>
           <GlobalStyled />
         </PageTemplate>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { PageContent } from '~/pages/styled';
+import { PageWrap } from '~/pages/styled';
 
-const CrawlingSettings: React.FC = () => <PageContent>CrawlingSettings</PageContent>;
+const CrawlingSettings: React.FC = () => <PageWrap>CrawlingSettings</PageWrap>;
 
 export default CrawlingSettings;

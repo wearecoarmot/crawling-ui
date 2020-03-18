@@ -1,8 +1,9 @@
-import React from 'react';
-import { PageContent } from '../styled';
+import React, { FC } from 'react';
 
-const DashBoard: React.FC = () => (
-  <PageContent>
+import { PageWrap } from '~/pages/styled';
+
+const DashBoard: FC = () => (
+  <PageWrap>
     <p>DashBoard</p>
     <p>DashBoard</p>
     <p>DashBoard</p>
@@ -114,7 +115,7 @@ const DashBoard: React.FC = () => (
     <p>DashBoard</p>
     <p>DashBoard</p>
     <p>DashBoard</p>
-  </PageContent>
+  </PageWrap>
 );
 
 export default DashBoard;
