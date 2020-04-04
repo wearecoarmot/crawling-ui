@@ -164,5 +164,30 @@ const func3 = function() {
 // pages router 내에서 보여지는 콤포넌트
 ```
 
+----
 
+# git commit lint
 
+```shell script
+type(scope?): subject
+
+body?
+footer?
+```
+
+## type-enum
+```text
+[
+  'build',
+  'ci',
+  'chore',
+  'docs',
+  'feat',
+  'fix',
+  'perf',
+  'refactor',
+  'revert',
+  'style',
+  'test'
+]
+```

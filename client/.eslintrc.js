@@ -13,14 +13,6 @@ module.exports = {
     "browser": true,
     "jest": true
   },
-  "ignorePatterns": [
-    "scripts/*",
-    "config/*",
-    "serviceWorker.*",
-    "setupProxy.*",
-    "**/*.d.ts",
-    "**/*.test.*"
-  ],
   "rules": {
     "prettier/prettier": ["warn"],
     "quotes": ["error", "single"],

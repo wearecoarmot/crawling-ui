@@ -1,0 +1,6 @@
+scripts/*
+config/*
+**/serviceWorker.*
+**/setupProxy.*
+**/*.d.ts
+**/*.test.*
