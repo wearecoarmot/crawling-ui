@@ -21,7 +21,7 @@ export const ThemeBtn = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-  
+
   > span {
     color: #a4cbf0;
     font-size: 12px;
