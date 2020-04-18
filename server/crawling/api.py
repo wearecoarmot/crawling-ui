@@ -1,17 +1,21 @@
-from django.http import JsonResponse, QueryDict
+import json
+
+from django.http import JsonResponse
 from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
+from server.crawling.enums.roles import Roles
 from server.crawling.exceptions.httpexception import HttpException, ConflictException, ForbiddenException
 from server.crawling.utils.hasherspassword import HashersPassword
 from server.crawling.utils.resreturner import ResReturner
 from server.crawling.utils.token import TokenUtils
 from server.crawling.utils.validator import Validator
-from .models import User, CrawlingSetting
-from .serializers import UserSerializer, CrawlingSettingSerializer
+from .extensions.authentication import CustomJSONWebTokenAuthentication
+from .models import User, Database
+from .serializers import UserSerializer, DataBaseSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -20,24 +24,24 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [CustomJSONWebTokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     @staticmethod
     def check_permission_or_raise(token: str, pk=None):
-        decoded_token = TokenUtils.decode_token(token.split(' ')[1])
+        decoded_token = TokenUtils.decode_token(token.split()[1])
         auth_user = get_object_or_404(UserViewSet.queryset, id=decoded_token['id'])
         if pk:
             target_user = get_object_or_404(UserViewSet.queryset, pk=pk)
-            if auth_user.roles != 'A' and auth_user.id != target_user.id:
+            if auth_user.roles != Roles.ADMIN.value and auth_user.id != target_user.id:
                 raise ForbiddenException(''''You don't have permission.''')
-        elif not pk and auth_user.roles != 'A':
+        elif not pk and auth_user.roles != Roles.ADMIN.value:
             raise ForbiddenException(''''You don't have permission.''')
 
     def create(self, req, *args, **kwargs):
         try:
             UserViewSet.check_permission_or_raise(req.headers['Authorization'])
-            body = QueryDict(req.body)
+            body = json.loads(req.body)
             Validator.param_validator(body, ['user_id', 'password', 'name'])
             user_id = body.get('user_id')
             password = body.get('password')
@@ -51,7 +55,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 id=user_id,
                 password=HashersPassword.get_hash_password(password),
                 name=name,
-                roles='B',
+                roles=Roles.USER.value,
             )
             user.save()
             return JsonResponse({
@@ -63,7 +67,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def update(self, req, pk=None):
         try:
             UserViewSet.check_permission_or_raise(req.headers['Authorization'], pk)
-            body = QueryDict(req.body)
+            body = json.loads(req.body)
             Validator.param_validator(body, ['name'])
             user = get_object_or_404(self.get_queryset(), pk=pk)
             if password := body.get('password'):
@@ -109,9 +113,9 @@ class UserViewSet(viewsets.ModelViewSet):
             return ResReturner.get_res(he.code, he.message)
 
 
-class CrawlingSettingViewSet(viewsets.ModelViewSet):
-    """
-    Crawling Setting api
-    """
-    queryset = CrawlingSetting.objects.all()
-    serializer_class = CrawlingSettingSerializer
+# TODO(kuckjwi): implementation code.
+class DatabaseViewSet(viewsets.ModelViewSet):
+    queryset = Database.objects.all()
+    serializer_class = DataBaseSerializer
+    authentication_classes = [JSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated]

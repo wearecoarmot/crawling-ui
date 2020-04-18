@@ -3,11 +3,6 @@ from django.db import models
 from django.contrib.auth.models import UserManager
 
 
-class CrawlingSetting(models.Model):
-    name = models.CharField(max_length=30)
-    last_run_time = models.DateTimeField()
-
-
 class User(AbstractBaseUser):
     USERNAME_FIELD = 'id'
 
@@ -22,5 +17,21 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
 
-class DataBaseSetting(models.Model):
-    pass
+class Database(models.Model):
+    idx = models.BigAutoField(primary_key=True)
+    user_idx = models.BigIntegerField(db_index=True)
+    db_user = models.CharField(max_length=100)
+    db_password = models.CharField(max_length=100)
+    db_url = models.CharField(max_length=100)
+    create_date = models.DateTimeField(auto_now_add=True, db_index=True)
+
+
+class Setting(models.Model):
+    name = models.CharField(max_length=30)
+    last_run_time = models.DateTimeField()
+
+
+class LoggedInToken(models.Model):
+    user = models.ForeignKey(User, related_name="token_user", on_delete=models.CASCADE)
+    token = models.CharField(max_length=1000)
+    timestamp = models.DateTimeField(auto_now=True, db_index=True)

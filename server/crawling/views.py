@@ -1,5 +1,7 @@
+import json
+
 from bs4 import BeautifulSoup
-from django.http import HttpRequest, JsonResponse, HttpResponseBadRequest
+from django.http import HttpRequest, JsonResponse, HttpResponseBadRequest, QueryDict
 from requests import get
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
@@ -11,8 +13,9 @@ from server.config import CHROME_DRIVER_PATH
 from server.crawling.exceptions.httpexception import (
     HttpException, UnAuthorizedException
 )
-from server.crawling.models import User
+from server.crawling.models import User, LoggedInToken
 from server.crawling.robot_parser import RobotParser
+from server.crawling.extensions.generics import get_or_empty
 from server.crawling.utils.hasherspassword import HashersPassword
 from server.crawling.utils.resreturner import ResReturner
 from server.crawling.utils.token import TokenUtils
@@ -23,21 +26,29 @@ from server.crawling.utils.validator import Validator
 def user_login(req: HttpRequest):
     login_fail_msg = 'Sign In information does not match.'
     try:
-        Validator.param_validator(req.POST, ['user_id', 'password'])
+        body = json.loads(req.body)
 
-        user_id = req.POST.get('user_id')
-        password = req.POST.get('password')
+        Validator.param_validator(body, ['user_id', 'password'])
 
-        user = User.objects.get(id=user_id)
+        user = User.objects.get(id=body.get('user_id'))
 
-        if not HashersPassword.is_matched_password(password, user.password):
+        if not HashersPassword.is_matched_password(body.get('password'), user.password):
             raise UnAuthorizedException(login_fail_msg)
 
         if user.active == 'N':
             raise UnAuthorizedException('This user is inactive.')
 
+        logged = get_or_empty(LoggedInToken.objects.get_queryset(), user=user)
+        token = TokenUtils.issue_token(user)
+
+        if not logged:
+            LoggedInToken.objects.create(user=user, token=token)
+        else:
+            logged.token = token
+            logged.save()
+
         return JsonResponse({
-            'token': TokenUtils.issue_token(user),
+            'token': token,
             'name': user.name,
         })
     except HttpException as he:
@@ -46,10 +57,10 @@ def user_login(req: HttpRequest):
         return ResReturner.get_res(status.HTTP_401_UNAUTHORIZED, login_fail_msg)
 
 
-
-# TODO(kuckjwi): need to blacklist check.
-@api_view(['GET'])
-def logout():
+@api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def logout(req: HttpRequest):
     pass
 
 

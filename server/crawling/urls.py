@@ -3,12 +3,11 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 from rest_framework_jwt.views import refresh_jwt_token, verify_jwt_token
 
-from .api import UserViewSet, CrawlingSettingViewSet
+from .api import UserViewSet
 from .views import is_possible_crawling, user_login
 
 router = routers.DefaultRouter()
-router.register(r'crawling/setting', CrawlingSettingViewSet)
-router.register(r'user', UserViewSet)
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
