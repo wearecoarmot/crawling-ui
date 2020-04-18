@@ -21,12 +21,6 @@ class RobotParserTestCase(TestCase):
         self.assertEquals(parser.get_disallow_urls(), ['/m', '/me'])
 
 
-# class TokenTestCase(TestCase):
-#     def test_generate(self):
-#         token = 'yJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNTgxMTYzMzMzLCJpZCI6ImFkbWluIn0.PGjDvqQJUBR-VXJ9g-RffdTasnZ5GZiSeJDBHdk_FAI'
-#         self.assertEqual(token, TokenUtils._decryption_token(TokenUtils._encryption_token(token)), 'Test!!')
-
-
 class UserApiTestCase(TestCase):
     def setUp(self):
         User.objects.create(
