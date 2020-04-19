@@ -1,21 +1,22 @@
 import json
 
 from bs4 import BeautifulSoup
-from django.http import HttpRequest, JsonResponse, HttpResponseBadRequest, QueryDict
+from django.http import HttpRequest, JsonResponse, HttpResponseBadRequest
 from requests import get
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from selenium import webdriver
 
 from server.config import CHROME_DRIVER_PATH
 from server.crawling.exceptions.httpexception import (
     HttpException, UnAuthorizedException
 )
+from server.crawling.extensions.authentication import CustomJSONWebTokenAuthentication
+from server.crawling.extensions.generics import get_or_empty
+from server.crawling.extensions.httpresponseextension import HttpResponseMoveTemporarily
 from server.crawling.models import User, LoggedInToken
 from server.crawling.robot_parser import RobotParser
-from server.crawling.extensions.generics import get_or_empty
 from server.crawling.utils.hasherspassword import HashersPassword
 from server.crawling.utils.resreturner import ResReturner
 from server.crawling.utils.token import TokenUtils
@@ -58,14 +59,19 @@ def user_login(req: HttpRequest):
 
 
 @api_view(['POST'])
-@authentication_classes([JSONWebTokenAuthentication])
+@authentication_classes([CustomJSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
-def logout(req: HttpRequest):
-    pass
+def logout(req):
+    logged = get_or_empty(LoggedInToken.objects.get_queryset(), user=req.user)
+    logged.delete()
+    res = HttpResponseMoveTemporarily()
+    protocol = 'https://' if req.is_secure() else 'http://'
+    res['Location'] = f'{protocol}{req.get_host()}/api/login'
+    return res
 
 
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
+@authentication_classes([CustomJSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def is_possible_crawling(req: HttpRequest):
     # TODO(kuckjwi): subdomain scan.
