@@ -11,3 +11,7 @@ class HttpResponseConflict(HttpResponse):
 
 class HttpResponseForbidden(HttpResponse):
     status_code = 403
+
+
+class HttpResponseMoveTemporarily(HttpResponse):
+    status_code = 302

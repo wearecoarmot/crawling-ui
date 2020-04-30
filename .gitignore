@@ -5,6 +5,7 @@ venv
 
 # intellij
 .idea
+*.iml
 
 # django
 *.pyc

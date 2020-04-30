@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import User, CrawlingSetting
+from .models import User, Database
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -9,7 +9,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
-class CrawlingSettingSerializer(serializers.HyperlinkedModelSerializer):
+class DataBaseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = CrawlingSetting
-        fields = ('name', 'last_run_time')
+        model = Database
+        fields = '__all__'

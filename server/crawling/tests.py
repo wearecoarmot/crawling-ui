@@ -1,11 +1,12 @@
 import os
-from json import loads
+from json import loads, dumps
 
 from django.test import TestCase
 
 from server.crawling.models import User
 from server.crawling.utils.hasherspassword import HashersPassword
 from .robot_parser import RobotParser
+from .utils.token import TokenUtils
 
 
 class RobotParserTestCase(TestCase):
@@ -31,48 +32,44 @@ class UserApiTestCase(TestCase):
 
     def test_generate(self):
         token = self.login()
-        print('get user')
+
         self.get_user_test(token)
-        print('create user')
         self.create_user_test(token)
-        print('update user')
         self.update_user_test(token)
-        print('delete user')
         self.delete_user_test(token)
 
     def get_user_test(self, token):
-        res = self.client.get('/api/user/', {}, HTTP_AUTHORIZATION=f'Bearer {token}')
+        res = self.client.get('/api/users/', {}, HTTP_AUTHORIZATION=f'Bearer {token}')
         json_res = loads(res.content.decode('utf-8'))
         self.assertIsNotNone(json_res)
 
     def create_user_test(self, token):
-        res = self.client.post('/api/user/', serializer({
+        res = self.client.post('/api/users/', dumps({
             'user_id': 'user1',
             'password': 'user1',
             'name': 'user1',
-        }), HTTP_AUTHORIZATION=f'Bearer {token}', content_type='application/x-www-form-urlencoded')
+        }), HTTP_AUTHORIZATION=f'Bearer {token}', content_type='application/json')
         self.assertEqual(loads(res.content.decode('utf-8'))['message'], 'success')
 
     def update_user_test(self, token):
-        res = self.client.put('/api/user/1/', serializer({
+        res = self.client.put('/api/users/1/', dumps({
             'name': 'user2',
-        }), HTTP_AUTHORIZATION=f'Bearer {token}')
+        }), HTTP_AUTHORIZATION=f'Bearer {token}', content_type='application/json')
         self.assertEqual(loads(res.content.decode('utf-8'))['message'], 'success')
 
     def delete_user_test(self, token):
-        res = self.client.delete('/api/user/1/', HTTP_AUTHORIZATION=f'Bearer {token}',
-                                 content_type='application/x-www-form-urlencoded')
+        res = self.client.delete('/api/users/1/', HTTP_AUTHORIZATION=f'Bearer {token}')
         self.assertEqual(loads(res.content.decode('utf-8'))['message'], 'success')
 
     def login(self):
-        res = self.client.post('/api/login', {
+        res = self.client.post('/api/login', dumps({
             'user_id': 'admin',
             'password': 'admin',
-        })
+        }), content_type="application/json")
         return loads(res.content.decode('utf-8'))['token']
 
 
-def serializer(dic):
+def serialize(dic):
     arr = []
     for key, value in dic.items():
         arr.append(f'{key}={value}')

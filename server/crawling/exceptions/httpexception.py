@@ -5,7 +5,8 @@ class HttpException(Exception):
     """
     Http root exception.
     """
-    pass
+    code = 500
+    message = 'Internal Server Error'
 
 
 class BadRequestException(HttpException):
