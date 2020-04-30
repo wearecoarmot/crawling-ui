@@ -62,8 +62,8 @@ def user_login(req: HttpRequest):
 @authentication_classes([CustomJSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def logout(req):
-    logged = get_or_empty(LoggedInToken.objects.get_queryset(), user=req.user)
-    logged.delete()
+    if logged := get_or_empty(LoggedInToken.objects.get_queryset(), user=req.user):
+        logged.delete()
     res = HttpResponseMoveTemporarily()
     protocol = 'https://' if req.is_secure() else 'http://'
     res['Location'] = f'{protocol}{req.get_host()}/api/login'
