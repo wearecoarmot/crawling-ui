@@ -5,6 +5,10 @@ export type Theme = {
   text: string;
   linkColor: string;
   footerColor: string;
+  signBack: string;
+  inputBack: string;
+  titleColor: string;
+  placeholder: string;
 };
 
 export const lightTheme: Theme = {
@@ -12,6 +16,10 @@ export const lightTheme: Theme = {
   body: 'linear-gradient(193.26deg, #D3F0C5 13.54%, rgba(255, 255, 255, 0) 87.5%), #C3DBF0;',
   linkColor: '#A4CBF0',
   footerColor: '#FFF',
+  signBack: '#E7F5F8',
+  inputBack: '#D7ECE2',
+  titleColor: '#666',
+  placeholder: '#B2D1C2',
 };
 
 export const darkTheme: Theme = {
@@ -19,6 +27,10 @@ export const darkTheme: Theme = {
   body: 'linear-gradient(193.26deg, #020054 13.54%, rgba(51, 51, 51, 0) 87.49%, rgba(85, 85, 85, 0) 87.5%), #000000',
   linkColor: '#444',
   footerColor: '#999',
+  signBack: '#54536F',
+  inputBack: '#9997B6',
+  titleColor: '#222',
+  placeholder: '#555555',
 };
 
 export const styled = baseStyled as ThemedStyledInterface<Theme>;

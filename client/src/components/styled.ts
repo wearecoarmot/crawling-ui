@@ -28,7 +28,7 @@ export const PageTemplate = styled.article`
   height: 100vh;
 `;
 
-export const PageContent = styled.div`
+export const PageContent = styled.main`
   width: 100%;
   overflow: auto;
 `;

@@ -7,7 +7,9 @@ export const SideContainer = styled.div`
   min-width: 215px;
 `;
 
-export const StyledLogo = styled.h1`
+export const StyledLogo = styled.div.attrs({
+  role: 'banner',
+})`
   display: flex;
   align-items: center;
   justify-content: center;
