@@ -9,6 +9,13 @@ export type Theme = {
   inputBack: string;
   titleColor: string;
   placeholder: string;
+  topGradient: string;
+  dashBoard: {
+    titleBackGroundColor: string;
+    titleColor: string;
+    defaultContentBackGroundColor: string;
+    defaultContentFontColor: string;
+  };
 };
 
 export const lightTheme: Theme = {
@@ -20,6 +27,13 @@ export const lightTheme: Theme = {
   inputBack: '#D7ECE2',
   titleColor: '#666',
   placeholder: '#B2D1C2',
+  topGradient: 'linear-gradient(180deg, rgba(212, 240, 201, 1) 50%, rgba(0, 0, 0, 0) 100%)',
+  dashBoard: {
+    titleBackGroundColor: '#ccc',
+    titleColor: '#999',
+    defaultContentBackGroundColor: '#fff',
+    defaultContentFontColor: '#aaa',
+  },
 };
 
 export const darkTheme: Theme = {
@@ -31,6 +45,13 @@ export const darkTheme: Theme = {
   inputBack: '#9997B6',
   titleColor: '#222',
   placeholder: '#555555',
+  topGradient: 'linear-gradient(180deg, #020054 50%, rgba(0,0,0,0) 100%)',
+  dashBoard: {
+    titleBackGroundColor: '#393e46',
+    titleColor: '#999',
+    defaultContentBackGroundColor: '#999',
+    defaultContentFontColor: '#555',
+  },
 };
 
 export const styled = baseStyled as ThemedStyledInterface<Theme>;
