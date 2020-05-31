@@ -1,29 +1,30 @@
-import { ChangeEvent } from 'react';
 import { createModel } from '@rematch/core';
 import { produce, Draft } from 'immer';
 
 export type userState = {
-  id: string;
+  username: string;
+  isLogged: boolean;
   [propName: string]: any;
 };
 
-const initialState: userState = {
-  id: '',
+const initialState: Partial<userState> = {
+  username: '',
+  isLogged: false,
 };
-
-type TypePayload = ChangeEvent<HTMLInputElement>;
 
 export const user = createModel<userState>({
   state: initialState,
   reducers: {
-    change: produce((state: Draft<userState>, payload: TypePayload) => {
-      const { name, value } = payload.currentTarget;
-      state[name] = value;
+    changeUser: produce((state: Draft<userState>, payload: userState) => {
+      state.username = payload.username;
+      state.isLogged = payload.isLogged;
     }),
+    getUser: produce((state: Draft<userState>, payload: userState) => {}),
   },
   effects: (dispatch) => ({
-    async changeAsync(payload) {
-      dispatch.user.change(payload);
+    async asyncChangeUser(payload) {
+      dispatch.user.changeLogged(payload);
     },
+    async asyncGetUser() {},
   }),
 });

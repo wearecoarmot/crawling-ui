@@ -26,7 +26,7 @@ export const UnAuthRoutes: RoutesArguments[] = [
 
   /* login */
   {
-    path: 'login',
+    path: '/login',
     component: SignIn,
   },
 ];
