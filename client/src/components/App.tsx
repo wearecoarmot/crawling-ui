@@ -15,6 +15,7 @@ import { UnAuthRoutes, AuthRoutes } from './Routes';
 import SideOption from './SideOption';
 import Loading from './Loading';
 import SideMenu from './SideMenu';
+import TopGradient from './TopGradient/TopGradient';
 
 import { GlobalStyled, PageTemplate, PageContent } from './styled';
 
@@ -41,6 +42,7 @@ const App = () => {
           <Suspense fallback={<Loading />}>
             <SideMenu isAuth={isAuth} />
             <PageContent>
+              <TopGradient />
               <Switch>
                 {Routes()}
                 <Redirect to="/" />
