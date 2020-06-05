@@ -32,7 +32,7 @@ To start this app, run as below:
     # first run
     python manage.py makemigrations
     python manage.py migrate
-    python manger.py createadmin
+    python manage.py createadmin
     # run server
     python manage.py runserver
     ~~~
@@ -41,3 +41,9 @@ To start this app, run as below:
    cd client/
     yarn start
     ~~~
+   
+## Run (Docker)
+~~~ shell script
+docker pull wearecoarmot/crawling-ui:latest
+docker run -d -it -p 8000:8000 wearecoarmot/crawling-ui:latest ./run.sh
+~~~

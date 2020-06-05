@@ -50,6 +50,7 @@ def user_login(req: HttpRequest):
 
         return JsonResponse({
             'token': token,
+            'idx': user.idx,
             'name': user.name,
         })
     except HttpException as he:
