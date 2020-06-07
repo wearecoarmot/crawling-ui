@@ -1,0 +1,10 @@
+[uwsgi]
+chdir=/crawling-ui
+module=server.wsgi:application
+master=true
+max-requests=5000
+processes=10
+socket=/crawling-ui/crawling-ui.sock
+vacuum=true
+http-socket=:8000
+static-map=/static=/crawling-ui/client/build/static

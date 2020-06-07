@@ -1,0 +1,7 @@
+**/node_modules
+**/venv
+**/build
+db.sqlite3
+Dockerfile
+requirements-dev.txt
+crawling.http
