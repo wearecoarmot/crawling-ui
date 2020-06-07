@@ -67,7 +67,7 @@ def logout(req):
         logged.delete()
     res = HttpResponseMoveTemporarily()
     protocol = 'https://' if req.is_secure() else 'http://'
-    res['Location'] = f'{protocol}{req.get_host()}/api/login'
+    res['Location'] = f'{protocol}{req.get_host()}'
     return res
 
 

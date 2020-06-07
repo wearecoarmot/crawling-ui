@@ -5,7 +5,6 @@ from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from server.crawling.enums.roles import Roles
 from server.crawling.exceptions.httpexception import HttpException, ConflictException, ForbiddenException
@@ -14,8 +13,8 @@ from server.crawling.utils.resreturner import ResReturner
 from server.crawling.utils.token import TokenUtils
 from server.crawling.utils.validator import Validator
 from .extensions.authentication import CustomJSONWebTokenAuthentication
-from .models import User, Database
-from .serializers import UserSerializer, DataBaseSerializer
+from .models import User, Database, Setting
+from .serializers import UserSerializer, DataBaseSerializer, SettingSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -117,5 +116,12 @@ class UserViewSet(viewsets.ModelViewSet):
 class DatabaseViewSet(viewsets.ModelViewSet):
     queryset = Database.objects.all()
     serializer_class = DataBaseSerializer
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [CustomJSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+class SettingViewSet(viewsets.ModelViewSet):
+    queryset = Setting.objects.all()
+    serializer_class = SettingSerializer
+    authentication_classes = [CustomJSONWebTokenAuthentication]
     permission_classes = [IsAuthenticated]
