@@ -1,12 +1,14 @@
-import { useReducer, FormEvent, ChangeEvent } from 'react';
+import { useState, useReducer, FormEvent, ChangeEvent } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { apiCall } from '~/utils';
+import { iRootDispatch } from '~/lib/store';
 
 const CHANGE_STATE = 'signup/change_state';
 
 type TypeState = {
   id: string;
   password: string;
-  isLoading: boolean;
 };
 
 type TypeAction = {
@@ -29,7 +31,6 @@ const reducer = (state: TypeState, action: TypeAction) => {
 const initialState: TypeState = {
   id: '',
   password: '',
-  isLoading: false,
 };
 
 export type TypeSignIn = {
@@ -39,17 +40,35 @@ export type TypeSignIn = {
 };
 
 function useSignIn(): TypeSignIn {
+  const rematch = useDispatch<iRootDispatch>();
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isLoading, setLoading] = useState(false);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (isLoading) return;
+
+    setLoading(true);
     try {
-      await apiCall.post('/api/login', {
+      const { data } = await apiCall.post('/api/login', {
         user_id: state.id,
         password: state.password,
       });
+
+      if (!!data.token) {
+        localStorage.setItem('auth', data.token);
+        rematch.user.changeUser({
+          isLogged: true,
+          username: data.name,
+        });
+      } else {
+        alert('서버에러 서버에러');
+      }
+      setLoading(false);
     } catch (err) {
       console.error(err);
+      alert('서버에러 서버에러');
+      setLoading(false);
     }
   };
 
