@@ -27,8 +27,12 @@ class Database(models.Model):
 
 
 class Setting(models.Model):
+    idx = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=30)
-    last_run_time = models.DateTimeField()
+    target_url = models.CharField(max_length=500)
+    target_tags = models.TextField()
+    create_date = models.DateTimeField(auto_now_add=True, db_index=True)
+    last_run_time = models.DateTimeField(auto_now=True, null=True)
 
 
 class LoggedInToken(models.Model):

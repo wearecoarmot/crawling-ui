@@ -1,5 +1,6 @@
 import binascii
 
+from os import environ
 from rest_framework import exceptions
 from rest_framework.exceptions import NotAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
