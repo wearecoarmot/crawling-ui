@@ -17,6 +17,8 @@ class CustomJSONWebTokenAuthentication(JSONWebTokenAuthentication):
         :param request: request
         :return: authenticate
         """
+        if not request.headers.get('Authorization'):
+            raise NotAuthenticated('Token header not found.')
         tokens = CustomJSONWebTokenAuthentication.parse_token(request)
         user, jwt_value = super().authenticate(request)
         logged = get_or_empty(LoggedInToken.objects.get_queryset(), token=tokens[1])

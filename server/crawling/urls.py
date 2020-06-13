@@ -7,8 +7,8 @@ from .api import UserViewSet, SettingViewSet
 from .views import is_possible_crawling, user_login, logout
 
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
-router.register(r'settings', SettingViewSet)
+router.register(r'users', UserViewSet, basename="UserViewSet")
+router.register(r'settings', SettingViewSet, basename="SettingViewSet")
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
