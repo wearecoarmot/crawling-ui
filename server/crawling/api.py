@@ -5,7 +5,6 @@ from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from server.crawling.enums.roles import Roles
 from server.crawling.exceptions.httpexception import HttpException, ConflictException, ForbiddenException
@@ -14,25 +13,26 @@ from server.crawling.utils.resreturner import ResReturner
 from server.crawling.utils.token import TokenUtils
 from server.crawling.utils.validator import Validator
 from .extensions.authentication import CustomJSONWebTokenAuthentication
-from .models import User, Database
-from .serializers import UserSerializer, DataBaseSerializer
+from .models import User, Setting, Database
+from .serializers import UserSerializer, DataBaseSerializer, SettingSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
     """
     User api
     """
-    queryset = User.objects.all()
     serializer_class = UserSerializer
     authentication_classes = [CustomJSONWebTokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    @staticmethod
-    def check_permission_or_raise(token: str, pk=None):
+    def get_queryset(self):
+        return User.objects.all()
+
+    def check_permission_or_raise(self, token: str, pk=None):
         decoded_token = TokenUtils.decode_token(token.split()[1])
-        auth_user = get_object_or_404(UserViewSet.queryset, id=decoded_token['id'])
+        auth_user = get_object_or_404(self.get_queryset(), id=decoded_token['id'])
         if pk:
-            target_user = get_object_or_404(UserViewSet.queryset, pk=pk)
+            target_user = get_object_or_404(self.get_queryset(), pk=pk)
             if auth_user.roles != Roles.ADMIN.value and auth_user.id != target_user.id:
                 raise ForbiddenException(''''You don't have permission.''')
         elif not pk and auth_user.roles != Roles.ADMIN.value:
@@ -40,7 +40,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def create(self, req, *args, **kwargs):
         try:
-            UserViewSet.check_permission_or_raise(req.headers['Authorization'])
+            self.check_permission_or_raise(req.headers['Authorization'])
             body = json.loads(req.body)
             Validator.param_validator(body, ['user_id', 'password', 'name'])
             user_id = body.get('user_id')
@@ -66,7 +66,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def update(self, req, pk=None):
         try:
-            UserViewSet.check_permission_or_raise(req.headers['Authorization'], pk)
+            self.check_permission_or_raise(req.headers['Authorization'], pk)
             body = json.loads(req.body)
             Validator.param_validator(body, ['name'])
             user = get_object_or_404(self.get_queryset(), pk=pk)
@@ -82,7 +82,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def destroy(self, req, pk=None):
         try:
-            UserViewSet.check_permission_or_raise(req.headers['Authorization'], pk)
+            self.check_permission_or_raise(req.headers['Authorization'], pk)
             user = get_object_or_404(self.get_queryset(), pk=pk)
             user.delete()
             return JsonResponse({
@@ -93,7 +93,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def list(self, req, *args, **kwargs):
         try:
-            UserViewSet.check_permission_or_raise(req.headers['Authorization'])
+            self.check_permission_or_raise(req.headers['Authorization'])
             serializer = UserSerializer(self.get_queryset(), context={
                 'request': req,
             },  many=True)
@@ -103,7 +103,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, req, pk=None):
         try:
-            UserViewSet.check_permission_or_raise(req.headers['Authorization'], pk)
+            self.check_permission_or_raise(req.headers['Authorization'], pk)
             user = get_object_or_404(self.get_queryset(), pk=pk)
             serializer = UserSerializer(user, context={
                 'request': req,
@@ -113,9 +113,49 @@ class UserViewSet(viewsets.ModelViewSet):
             return ResReturner.get_res(he.code, he.message)
 
 
-# TODO(kuckjwi): implementation code.
 class DatabaseViewSet(viewsets.ModelViewSet):
-    queryset = Database.objects.all()
     serializer_class = DataBaseSerializer
-    authentication_classes = [JSONWebTokenAuthentication]
+    authentication_classes = [CustomJSONWebTokenAuthentication]
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Database.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        pass
+
+    def update(self, request, *args, **kwargs):
+        pass
+
+    def list(self, request, *args, **kwargs):
+        pass
+
+    def retrieve(self, request, *args, **kwargs):
+        pass
+
+    def destroy(self, request, *args, **kwargs):
+        pass
+
+
+class SettingViewSet(viewsets.ModelViewSet):
+    serializer_class = SettingSerializer
+    authentication_classes = [CustomJSONWebTokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Setting.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        pass
+
+    def update(self, request, *args, **kwargs):
+        pass
+
+    def list(self, request, *args, **kwargs):
+        pass
+
+    def retrieve(self, request, *args, **kwargs):
+        pass
+
+    def destroy(self, request, *args, **kwargs):
+        pass

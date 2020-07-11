@@ -1,5 +1,6 @@
 import binascii
 
+from os import environ
 from rest_framework import exceptions
 from rest_framework.exceptions import NotAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
@@ -16,6 +17,8 @@ class CustomJSONWebTokenAuthentication(JSONWebTokenAuthentication):
         :param request: request
         :return: authenticate
         """
+        if not request.headers.get('Authorization'):
+            raise NotAuthenticated('Token header not found.')
         tokens = CustomJSONWebTokenAuthentication.parse_token(request)
         user, jwt_value = super().authenticate(request)
         logged = get_or_empty(LoggedInToken.objects.get_queryset(), token=tokens[1])
