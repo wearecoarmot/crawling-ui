@@ -1,4 +1,3 @@
 {
-  "message.hello": "Hello",
-  "n.selected": "{{n}} selected."
+  "dashboard.empty": "No Data."
 }

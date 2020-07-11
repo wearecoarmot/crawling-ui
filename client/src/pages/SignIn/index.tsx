@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Helmet } from 'react-helmet';
 
 import SignInContainer from '~/containers/SignIn';
 
-import { SignWrap } from '../styled';
+import { SignWrap } from '~/pages/styled';
 
 interface Props {}
 
-const Sign: React.FC<Props> = () => {
+const Sign: FC<Props> = () => {
   return (
     <SignWrap>
       <Helmet>

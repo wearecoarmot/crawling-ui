@@ -1,4 +1,4 @@
-import styled from '~/lib/styled';
+import styled from 'styled-components';
 
 export const StyledDashBoard = styled.div`
   display: flex;
@@ -9,8 +9,8 @@ export const StyledDashBoard = styled.div`
 
 export const StyledBoardTitle = styled.div`
   display: flex;
-  height: 40px;
   margin-top: 100px;
+
   div {
     width: 300px;
     padding: 11px 20px;
@@ -20,9 +20,11 @@ export const StyledBoardTitle = styled.div`
     color: ${({ theme }) => theme.dashBoard.titleColor};
     font-weight: bold;
     font-size: 14px;
+
     &:first-child {
       text-align: left;
     }
+
     &:last-child {
       text-align: right;
     }
