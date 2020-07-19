@@ -1,3 +1,13 @@
 {
-  "dashboard.empty": "데이터가 없습니다."
+  "title": {
+    "dashboard": "대시보드",
+    "signIn": "로그인"
+  },
+  "signIn": {
+    "header": "로그인",
+    "button": "로그인"
+  },
+  "dashboard": {
+    "empty": "데이터가 없습니다."
+  }
 }
