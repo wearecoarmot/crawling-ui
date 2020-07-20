@@ -3,6 +3,7 @@
     "react-app"
   ],
   "plugins": [
+    "babel-plugin-styled-components",
     [
       "babel-plugin-root-import",
       {

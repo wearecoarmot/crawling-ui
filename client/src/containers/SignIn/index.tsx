@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import useSignIn from '~/hooks/useSignIn';
 
@@ -8,6 +9,7 @@ import SignInput from '~/components/Sign/SignInput';
 import SignButton from '~/components/Sign/SignButton';
 
 const SignInContainer = () => {
+  const { t } = useTranslation();
   const {
     state: { id, password },
     onSubmit,
@@ -15,10 +17,10 @@ const SignInContainer = () => {
   } = useSignIn();
   return (
     <SignForm onSubmit={onSubmit}>
-      <SignTitle title="Sign In" />
+      <SignTitle title={t('signIn.header')} />
       <SignInput type="text" placeholder="ID" name="id" value={id} onChange={onChange} />
       <SignInput type="password" placeholder="PASSWORD" name="password" value={password} onChange={onChange} />
-      <SignButton type="submit" title="Sign In" />
+      <SignButton type="submit" title={t('signIn.button')} />
     </SignForm>
   );
 };

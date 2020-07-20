@@ -2,11 +2,11 @@ import React, { Suspense, useCallback, useLayoutEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 
 import useDarkMode, { Theme, ToggleTheme } from '~/hooks/useDarkMode';
 import useAuthUser from '~/hooks/useAuthUser';
 
-import { ThemeProvider } from '~/lib/styled';
 import { iRootDispatch } from '~/lib/store';
 import { darkTheme, lightTheme } from '~/theme';
 

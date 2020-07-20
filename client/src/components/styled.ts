@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from '~/lib/styled';
+import styled, { createGlobalStyle } from 'styled-components';
 import { reset } from 'styled-reset';
 
 export const GlobalStyled = createGlobalStyle`
@@ -29,6 +29,8 @@ export const PageTemplate = styled.article`
 `;
 
 export const PageContent = styled.main`
+  flex-grow: 1;
   width: 100%;
+  padding: 0 80px;
   overflow: auto;
 `;

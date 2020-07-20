@@ -1,4 +1,4 @@
-import styled from '~/lib/styled';
+import styled from 'styled-components';
 
 export const SideOption = styled.header`
   position: fixed;

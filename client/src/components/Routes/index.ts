@@ -39,12 +39,6 @@ export const AuthRoutes: RoutesArguments[] = [
     exact: true,
   },
 
-  /* dashboard */
-  {
-    path: '/dashboard',
-    component: DashBoard,
-  },
-
   /* settings */
   {
     path: '/crawling/settings',

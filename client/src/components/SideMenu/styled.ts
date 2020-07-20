@@ -1,4 +1,4 @@
-import styled from '~/lib/styled';
+import styled from 'styled-components';
 
 export const SideContainer = styled.div`
   display: flex;

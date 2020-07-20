@@ -1,4 +1,13 @@
 {
-  "message.hello": "안녕하세요",
-  "n.selected": "{{n}} 개 선택됨."
+  "title": {
+    "dashboard": "대시보드",
+    "signIn": "로그인"
+  },
+  "signIn": {
+    "header": "로그인",
+    "button": "로그인"
+  },
+  "dashboard": {
+    "empty": "데이터가 없습니다."
+  }
 }

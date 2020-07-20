@@ -25,7 +25,9 @@ const SideArea: FC<TypeSideArea> = ({ isAuth }) => (
     {isAuth && (
       <SideMenu>
         <SideItem>
-          <NavLink to="/dashboard">Dashboard</NavLink>
+          <NavLink to="/" exact>
+            Dashboard
+          </NavLink>
         </SideItem>
         <SideItem>
           <NavLink to="/crawling/settings">Crawling Setting</NavLink>
